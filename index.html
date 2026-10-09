@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TÉCNICAS DE ARTES VISUALES - Galería</title>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            background-color: #e8f5e9; 
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #2e7d32;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            padding: 5px 15px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            background-color: #4caf50;
+            border-radius: 5px;
+        }
+        .seccion-tecnicas {
+            padding: 80px 20px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+        .seccion-tecnicas h2 { color: brown; font-size: 2.5rem; }
+        .banner-tecnicas {
+            width: 90%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 30px auto;
+        }
+        .tecnica-card {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid #c8e6c9;
+            text-align: center;
+        }
+        .contenedor-galeria {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .layout-principal {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .seccion-scroll {
+            flex: 2;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 25px;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #c8e6c9;
+        }
+        .grid-imagenes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .grid-imagenes img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #f1f8e9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .seccion-destacada {
+            flex: 1;
+            min-width: 280px;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            border: 2px solid #81c784;
+            height: fit-content;
+        }
+        .img-ultima {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #e8f5e9;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .tabla-horario {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-collapse: collapse;
+            background-color: white;
+        }
+        .tabla-horario th { background-color: #2e7d32; color: white; padding: 15px; }
+        .tabla-horario td { border: 1px solid #eee; padding: 12px; text-align: center; }
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: #2e7d32;
+            color: white;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#menu-tecnicas">Técnicas</a>
+        <a href="#galeria-seccion">Galería</a>
+        <a href="ARTESVISUALES.HTML">Menú</a>
+    </nav>
+
+    <section id="menu-tecnicas" class="seccion-tecnicas">
+        <h2>Técnicas Artes Visuales</h2>
+        <img src="1.1.jpg" alt="Imagen Representativa" class="banner-tecnicas">
+        <p style="font-size: 0.8rem; color: #666;">"pinceles 2" by rakufrecsia is licensed under CC BY 2.0.</p>
+
+        <div class="menu-grid">
+            <div class="tecnica-card">
+                <h3>TÉCNICA LÁPIZ</h3>
+                <a href="TÉCNICA LÁPIZ.html"><img src="art-and-design.png" width="60" height="60"></a>
+            </div>
+            <div class="tecnica-card">
+                <h3>TÉCNICA PLUMA</h3>
+                <a href="TÉCNICA PLUMA.html"><img src="art-and-design.png" width="60" height="60"></a>
+            </div>
+            <div class="tecnica-card">
+                <h3>TÉCNICA PLUMA-PUNTILLISMO</h3>
+                <a href="puntillismo.html"><img src="art-and-design.png" width="60" height="60"></a>
+            </div>
+            <div class="tecnica-card">
+                <h3>TÉCNICA PLUMA-PRESPECTIVA</h3>
+                <a href="TÉCNICA PLUMA PRESPECTIVA.html"><img src="art-and-design.png" width="60" height="60"></a>
+            </div>
+            <div class="tecnica-card">
+                <h3>TÉCNICA PUNTOS DE FUGA</h3>
+                <a href="TÉCNICA PUNTOS DE FUGA.html"><img src="art-and-design.png" width="60" height="60"></a>
+            </div>
+            <div class="tecnica-card">
+                <h3>TÉCNICA ESCALA</h3>
+                <a href="TÉCNICA ESCALA.html"><img src="art-and-design.png" width="60" height="60"></a>
+            </div>
+            <div class="tecnica-card">
+                <h3>TÉCNICA COLOR</h3>
+                <a href="TÉCNICA COLOR.html"><img src="art-and-design.png" width="60" height="60"></a>
+            </div>
+            <div class="tecnica-card">
+                <h3>TÉCNICA GISES PAPEL</h3>
+                <a href="TÉCNICA GISES PASTELES.html"><img src="art-and-design.png" width="60" height="60"></a>
+            </div>
+            <div class="tecnica-card">
+                <h3>TÉCNICA ACUARELA</h3>
+                <a href="TÉCNICA ACUARELA.html"><img src="art-and-design.png" width="60" height="60"></a>
+            </div>
+            <div class="tecnica-card">
+                <h3>TÉCNICA ÓLEO</h3>
+                <a href="TÉCNICA ÓLEO.html"><img src="art-and-design.png" width="60" height="60"></a>
+            </div>
+        </div>
+    </section>
+
+    <div id="galeria-seccion" class="contenedor-galeria">
+        <div class="layout-principal">
+            <div class="seccion-scroll">
+                <h2 style="text-align: center; color: #2e7d32;">Galería de Trabajos</h2>
+                <div class="grid-imagenes" id="grid-js">
+                    <p id="msg-vacio" style="padding: 20px;">Cargando imágenes...</p>
+                </div>
+            </div>
+
+            <div class="seccion-destacada">
+                <h3 style="color: brown;">Última Guardada</h3>
+                <div id="contenedor-ultima">
+                    <p style="color: #999;">Sin fotos recientes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <div style="padding: 60px 20px; text-align: center; background-color: #f9fbf9;">
+        <h2 style="color: #2e7d32; font-size: 2rem; margin-bottom: 10px;">📅 Horario de Actividades</h2>
+        <p style="color: #555; margin-bottom: 30px;">Consulta tus clases presenciales para organizar tus entregas.</p>
+        
+        <div style="overflow-x: auto;">
+            <table class="tabla-horario">
+                <thead>
+                    <tr>
+                        <th>HORA</th>
+                        <th>LUNES</th>
+                        <th>MARTES</th>
+                        <th>MIÉRCOLES</th>
+                        <th>JUEVES</th>
+                        <th>VIERNES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="background-color: #f1f8e9; font-weight: bold; color: #2e7d32;">08:00 - 11:20</td>
+                        <td colspan="5" style="background-color: #fffde7; font-style: italic; color: #827717;">Clase libre o de otra materia</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #e8f5e9; font-weight: bold; color: #2e7d32;">11:20 - 11:40</td>
+                        <td colspan="5" style="background-color: #e3f2fd; font-weight: bold; color: #1565c0;">☕ RECESO</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #f1f8e9; font-weight: bold; color: #2e7d32;">11:40 - 14:00</td>
+                        <td style="background-color: #e8f5e9; color: #1b5e20; font-weight: bold;">🎨 ARTES VISUALES</td>
+                        <td style="background-color: #fffde7; font-style: italic; color: #827717; font-size: 0.85rem;">Clase libre o de otra materia</td>
+                        <td style="background-color: #e8f5e9; color: #1b5e20; font-weight: bold;">🎨 ARTES VISUALES</td>
+                        <td style="background-color: #fffde7; font-style: italic; color: #827717; font-size: 0.85rem;">Clase libre o de otra materia</td>
+                        <td style="background-color: #e8f5e9; color: #1b5e20; font-weight: bold;">🎨 ARTES VISUALES</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Técnicas de Artes Visuales</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDQUmLhpzEPENHoKK_5vZXUsmvEIU7oc_I",
+            authDomain: "galeria-de-arte-alumnos.firebaseapp.com",
+            projectId: "galeria-de-arte-alumnos",
+            storageBucket: "galeria-de-arte-alumnos.firebasestorage.app",
+            messagingSenderId: "828170010343",
+            appId: "1:828170010343:web:9e73cd708866ace7fa6c42"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.onload = async function() {
+            const grid = document.getElementById('grid-js');
+            const contenedorUltima = document.getElementById('contenedor-ultima');
+            const msgVacio = document.getElementById('msg-vacio');
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "galeriaEscolar"));
+                
+                if (!querySnapshot.empty) {
+                    msgVacio.style.display = 'none';
+                    contenedorUltima.innerHTML = '';
+                    grid.innerHTML = '';
+
+                    let listaFotos = [];
+                    querySnapshot.forEach((doc) => {
+                        listaFotos.push(doc.data().imagenUrl);
+                    });
+
+                    [...listaFotos].reverse().forEach(foto => {
+                        const img = document.createElement('img');
+                        img.src = foto;
+                        grid.appendChild(img);
+                    });
+
+                    const ultimaImg = document.createElement('img');
+                    ultimaImg.src = listaFotos[listaFotos.length - 1]; 
+                    ultimaImg.className = 'img-ultima';
+                    contenedorUltima.appendChild(ultimaImg);
+                    
+                    const p = document.createElement('p');
+                    p.style.fontSize = '0.9rem';
+                    p.style.color = '#666';
+                    p.style.marginTop = '10px';
+                    p.innerText = 'Tu creación más reciente';
+                    contenedorUltima.appendChild(p);
+                } else {
+                    msgVacio.innerText = 'No hay imágenes aún.';
+                }
+            } catch (error) {
+                console.error("Error al cargar en index:", error);
+                msgVacio.innerText = 'Error al conectar con la nube.';
+            }
+        }
+    </script>
+</body>
+</html>
