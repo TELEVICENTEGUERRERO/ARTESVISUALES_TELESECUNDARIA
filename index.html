@@ -38,11 +38,11 @@
             border-radius: 5px;
         }
         .seccion-tecnicas {
-            padding: 80px 20px;
+            padding: 100px 20px 40px 20px;
             background-color: #ffffff;
             text-align: center;
         }
-        .seccion-tecnicas h2 { color: brown; font-size: 2.5rem; }
+        .seccion-tecnicas h2 { color: brown; font-size: 2.5rem; margin-top: 10px; }
         .banner-tecnicas {
             width: 90%;
             max-width: 450px;
@@ -51,6 +51,44 @@
             margin: 20px auto;
             display: block;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .seccion-bienvenida {
+            max-width: 900px;
+            margin: 30px auto;
+            text-align: left;
+            background-color: #f1f8e9;
+            padding: 25px 30px;
+            border-radius: 15px;
+            border: 1px solid #c8e6c9;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .seccion-bienvenida h3 {
+            color: #2e7d32;
+            font-size: 1.4rem;
+            margin-top: 0;
+            text-align: center;
+        }
+        .seccion-bienvenida p {
+            line-height: 1.6;
+            color: #333;
+            text-align: justify;
+        }
+        .seccion-bienvenida ol {
+            padding-left: 20px;
+        }
+        .seccion-bienvenida ol li {
+            text-align: justify;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            color: #2e7d32;
+        }
+        .seccion-bienvenida ol li span {
+            color: #333;
+        }
+        .bloque-definicion {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 2px dashed #a5d6a7;
         }
         .menu-grid {
             display: grid;
@@ -65,10 +103,6 @@
             border-radius: 15px;
             border: 1px solid #c8e6c9;
             text-align: center;
-            .lista-azul li {
-    text-align: justify;
-    margin-bottom: 10px; /* Opcional: da un pequeño respiro entre cada elemento de la lista */
-}
         }
         .contenedor-galeria {
             padding: 60px 20px;
@@ -147,57 +181,77 @@
 <body>
 
     <nav>
-        <a href="#">Inicio</a>
-        <a href="#menu-tecnicas">Técnicas</a>
+        <a href="#inicio">Inicio</a>
+        <a href="#menu-tecnicas">Menú</a>
         <a href="#galeria-seccion">Galería</a>
-        <a href="ARTESVISUALES.HTML">Menú</a>
+        <a href="ARTESVISUALES.HTML">Artes Visuales</a>
     </nav>
 
-    <section id="menu-tecnicas" class="seccion-tecnicas">
+    <section id="inicio" class="seccion-tecnicas">
         <h2>Técnicas Artes Visuales</h2>
         <img src="1.1.jpg" alt="Imagen Representativa" class="banner-tecnicas">
-        <p style="font-size: 0.8rem; color: #666;">"pinceles 2" by rakufrecsia is licensed under CC BY 2.0.</p>
+        <p style="font-size: 0.8rem; color: #666; text-align: center;">"pinceles 2" by rakufrecsia is licensed under CC BY 2.0.</p>
 
-        <div class="menu-grid">
-            <div class="tecnica-card">
-                <h3>TÉCNICA LÁPIZ</h3>
-                <a href="TÉCNICA LÁPIZ.html"><img src="art-and-design.png" width="60" height="60"></a>
+        <!-- Sección de Bienvenida y Presentación -->
+        <div class="seccion-bienvenida">
+            <p><strong>Bienvenidas y Bienvenidos estudiantes, padres, madres y personas de la comunidad del Salto Villanueva</strong>, esta página está diseñada para que:</p>
+            
+            <ol>
+                <li><span>Las y los alumnos de primer grado puedan reforzar sus conocimientos obtenidos en clases presenciales en la materia de artes visuales, sobre las diversas técnicas abordadas.</span></li>
+                <li><span>Las y los alumnos den a conocer sus creaciones artísticas, las cuales son reflejo de un proceso arduo de trabajo, creatividad, amor, visión crítica y socialización.</span></li>
+                <li><span>Madres y padres de familia, así como todas las personas de la comunidad, logren observar y valorar los proyectos finales en la clase de artes visuales, las cuales abordan problemáticas de la comunidad.</span></li>
+            </ol>
+
+            <div class="bloque-definicion">
+                <h3>¿Qué son las Artes Visuales?</h3>
+                <p>Las <strong>Artes Visuales</strong> son un conjunto de manifestaciones artísticas de naturaleza expresiva y perceptiva que se aprecian principalmente a través de la vista. Abarcan desde disciplinas tradicionales como la pintura, el dibujo, la escultura y el grabado, hasta expresiones contemporáneas. Su propósito fundamental es comunicar emociones, ideas, visiones del mundo y reflexiones críticas a través del lenguaje de las formas, los colores, las texturas y el espacio.</p>
             </div>
-            <div class="tecnica-card">
-                <h3>TÉCNICA PLUMA</h3>
-                <a href="TÉCNICA PLUMA.html"><img src="art-and-design.png" width="60" height="60"></a>
-            </div>
-            <div class="tecnica-card">
-                <h3>TÉCNICA PLUMA-PUNTILLISMO</h3>
-                <a href="puntillismo.html"><img src="art-and-design.png" width="60" height="60"></a>
-            </div>
-            <div class="tecnica-card">
-                <h3>TÉCNICA PLUMA-PRESPECTIVA</h3>
-                <a href="TÉCNICA PLUMA PRESPECTIVA.html"><img src="art-and-design.png" width="60" height="60"></a>
-            </div>
-            <div class="tecnica-card">
-                <h3>TÉCNICA PUNTOS DE FUGA</h3>
-                <a href="TÉCNICA PUNTOS DE FUGA.html"><img src="art-and-design.png" width="60" height="60"></a>
-            </div>
-            <div class="tecnica-card">
-                <h3>TÉCNICA ESCALA</h3>
-                <a href="TÉCNICA ESCALA.html"><img src="art-and-design.png" width="60" height="60"></a>
-            </div>
-            <div class="tecnica-card">
-                <h3>TÉCNICA COLOR</h3>
-                <a href="TÉCNICA COLOR.html"><img src="art-and-design.png" width="60" height="60"></a>
-            </div>
-            <div class="tecnica-card">
-                <h3>TÉCNICA GISES PAPEL</h3>
-                <a href="TÉCNICA GISES PASTELES.html"><img src="art-and-design.png" width="60" height="60"></a>
-            </div>
-            <div class="tecnica-card">
-                <h3>TÉCNICA ACUARELA</h3>
-                <a href="TÉCNICA ACUARELA.html"><img src="art-and-design.png" width="60" height="60"></a>
-            </div>
-            <div class="tecnica-card">
-                <h3>TÉCNICA ÓLEO</h3>
-                <a href="TÉCNICA ÓLEO.html"><img src="art-and-design.png" width="60" height="60"></a>
+        </div>
+
+        <!-- Sección de Menú de Tarjetas de Técnicas -->
+        <div id="menu-tecnicas" style="padding-top: 20px;">
+            <h2 style="color: #2e7d32; font-size: 2rem;">Explora las Técnicas</h2>
+            <div class="menu-grid">
+                <div class="tecnica-card">
+                    <h3>TÉCNICA LÁPIZ</h3>
+                    <a href="TÉCNICA LÁPIZ.html"><img src="art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA PLUMA</h3>
+                    <a href="TÉCNICA PLUMA.html"><img src="art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA PLUMA-PUNTILLISMO</h3>
+                    <a href="puntillismo.html"><img src="art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA PLUMA-PRESPECTIVA</h3>
+                    <a href="TÉCNICA PLUMA PRESPECTIVA.html"><img src="art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA PUNTOS DE FUGA</h3>
+                    <a href="TÉCNICA PUNTOS DE FUGA.html"><img src="art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA ESCALA</h3>
+                    <a href="TÉCNICA ESCALA.html"><img src="art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA COLOR</h3>
+                    <a href="TÉCNICA COLOR.html"><img src="art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA GISES PAPEL</h3>
+                    <a href="TÉCNICA GISES PASTELES.html"><img src="art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA ACUARELA</h3>
+                    <a href="TÉCNICA ACUARELA.html"><img src="art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA ÓLEO</h3>
+                    <a href="TÉCNICA ÓLEO.html"><img src="art-and-design.png" width="60" height="60"></a>
+                </div>
             </div>
         </div>
     </section>
@@ -220,7 +274,7 @@
         </div>
     </div>
 
-   <div style="padding: 60px 20px; text-align: center; background-color: #f9fbf9;">
+    <div style="padding: 60px 20px; text-align: center; background-color: #f9fbf9;">
         <h2 style="color: #2e7d32; font-size: 2rem; margin-bottom: 10px;">📅 Horario de Actividades</h2>
         <p style="color: #555; margin-bottom: 30px;">Consulta tus clases presenciales para organizar tus entregas.</p>
         
