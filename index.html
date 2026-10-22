@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TÉCNICAS DE ARTES VISUALES - Galería</title>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            background-color: #e8f5e9; 
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #2e7d32;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            padding: 5px 15px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            background-color: #4caf50;
+            border-radius: 5px;
+        }
+        .seccion-tecnicas {
+            padding: 100px 20px 40px 20px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+        .seccion-tecnicas h2 { 
+            color: brown; 
+            font-size: 2.5rem; 
+            margin-top: 10px; 
+            margin-bottom: 5px;
+        }
+        .subtitulo-escuela {
+            color: #1b5e20;
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .banner-tecnicas {
+            width: 90%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .seccion-bienvenida {
+            max-width: 900px;
+            margin: 30px auto;
+            text-align: left;
+            background-color: #f1f8e9;
+            padding: 25px 30px;
+            border-radius: 15px;
+            border: 1px solid #c8e6c9;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .seccion-bienvenida h3 {
+            color: #2e7d32;
+            font-size: 1.4rem;
+            margin-top: 0;
+            text-align: center;
+        }
+        .seccion-bienvenida p {
+            line-height: 1.6;
+            color: #333;
+            text-align: justify;
+        }
+        .seccion-bienvenida ol {
+            padding-left: 20px;
+        }
+        .seccion-bienvenida ol li {
+            text-align: justify;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            color: #2e7d32;
+        }
+        .seccion-bienvenida ol li span {
+            color: #333;
+        }
+        .bloque-definicion {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 2px dashed #a5d6a7;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 30px auto;
+        }
+        .tecnica-card {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid #c8e6c9;
+            text-align: center;
+        }
+        .contenedor-galeria {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .layout-principal {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .seccion-scroll {
+            flex: 2;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 25px;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #c8e6c9;
+        }
+        .grid-imagenes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .grid-imagenes img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #f1f8e9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .seccion-destacada {
+            flex: 1;
+            min-width: 280px;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            border: 2px solid #81c784;
+            height: fit-content;
+        }
+        .img-ultima {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #e8f5e9;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .tabla-horario {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-collapse: collapse;
+            background-color: white;
+        }
+        .tabla-horario th { background-color: #2e7d32; color: white; padding: 15px; }
+        .tabla-horario td { border: 1px solid #eee; padding: 12px; text-align: center; }
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: #2e7d32;
+            color: white;
+            margin-top: 50px;
+        }
+    </style>
+    <!-- CAMBIO 1 (accesibilidad): panel con control de tamano de fuente. -->
+    <link rel="stylesheet" href="css/accesibilidad.css">
+    <!-- CAMBIO 4 (idioma): diccionario espanol a ingles. Debe cargarse ANTES de accesibilidad.js. -->
+    <script src="js/idiomas/en.js"></script>
+    <!-- Va en el head (sin defer) para aplicar el tamano guardado antes de pintar la pagina. -->
+    <script src="js/accesibilidad.js"></script>
+</head>
+<body>
+
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#menu-tecnicas">Menú</a>
+        <a href="#galeria-seccion">Galería</a>
+        <a href="#horario-seccion">Horario</a>
+    </nav>
+
+    <section id="inicio" class="seccion-tecnicas">
+        <h2>TÉCNICAS ARTES VISUALES</h2>
+        <h4 class="subtitulo-escuela">ESCUELA TELESECUNDARIA</h4>
+        <h4 class="subtitulo-escuela"> "VICENTE GUERRERO"</h4>
+             <h4 class="subtitulo-escuela">C.C.T. 32ETV0059M </h4>
+        <h4 class="subtitulo-escuela"> EL SALTO VILLANUEVA </h4>
+         <h4 class="subtitulo-escuela">PROYECTO ARTÍSTICO-TECNOLÓGICO</h4>
+        <h4 class="subtitulo-escuela"> OCTUBRE 2026 </h4>
+        
+        <img src="img/general/1.1.jpg" alt="Imagen Representativa" class="banner-tecnicas">
+        <p style="font-size: 0.8rem; color: #666; text-align: center;">"pinceles 2" by rakufrecsia is licensed under CC BY 2.0.</p>
+
+        <!-- Sección de Bienvenida y Presentación -->
+        <div class="seccion-bienvenida">
+            <p><strong>Bienvenidas y Bienvenidos estudiantes, padres, madres y personas de la comunidad del Salto Villanueva</strong>, esta página está diseñada para que:</p>
+            
+            <ol>
+                <li><span>Las y los alumnos de primer grado puedan reforzar sus conocimientos obtenidos en clases presenciales en la materia de artes visuales, sobre las diversas técnicas abordadas.</span></li>
+                <li><span>Las y los alumnos den a conocer sus creaciones artísticas, las cuales son reflejo de un proceso arduo de trabajo, creatividad, amor, visión crítica y socialización.</span></li>
+                <li><span>Madres y padres de familia, así como todas las personas de la comunidad, logren observar y valorar los proyectos finales en la clase de artes visuales, las cuales abordan problemáticas de la comunidad.</span></li>
+            </ol>
+
+            <div class="bloque-definicion">
+                <h3>¿Qué son las Artes Visuales?</h3>
+                <p>Las <strong>Artes Visuales</strong> son un conjunto de manifestaciones artísticas de naturaleza expresiva y perceptiva que se aprecian principalmente a través de la vista. Abarcan desde disciplinas tradicionales como la pintura, el dibujo, la escultura y el grabado, hasta expresiones contemporáneas. Su propósito fundamental es comunicar emociones, ideas, visiones del mundo y reflexiones críticas a través del lenguaje de las formas, los colores, las texturas y el espacio.</p>
+            </div>
+        </div>
+
+        <!-- Sección de Menú de Tarjetas de Técnicas -->
+        <div id="menu-tecnicas" style="padding-top: 20px;">
+            <h2 style="color: #2e7d32; font-size: 2rem;">Explora las Técnicas</h2>
+            <p>Ingresa a la técnica de tu agrado, sólo debes dar un clik</p>
+            <div class="menu-grid">
+                <div class="tecnica-card">
+                    <h3>TÉCNICA LÁPIZ</h3>
+                    <a href="paginas/TÉCNICA LÁPIZ.html"><img src="img/iconos/art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA PLUMA</h3>
+                    <a href="paginas/TÉCNICA PLUMA.html"><img src="img/iconos/art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA PLUMA-PUNTILLISMO</h3>
+                    <a href="paginas/puntillismo.html"><img src="img/iconos/art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA PLUMA-PRESPECTIVA</h3>
+                    <a href="paginas/TÉCNICA PLUMA PRESPECTIVA.html"><img src="img/iconos/art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA PUNTOS DE FUGA</h3>
+                    <a href="paginas/TÉCNICA PUNTOS DE FUGA.html"><img src="img/iconos/art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA ESCALA</h3>
+                    <a href="paginas/TÉCNICA ESCALA.html"><img src="img/iconos/art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA COLOR</h3>
+                    <a href="paginas/TÉCNICA COLOR.html"><img src="img/iconos/art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA GISES PASTEL</h3>
+                    <a href="paginas/TÉCNICA GISES PASTELES.html"><img src="img/iconos/art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA ACUARELA</h3>
+                    <a href="paginas/TÉCNICA ACUARELA.html"><img src="img/iconos/art-and-design.png" width="60" height="60"></a>
+                </div>
+                <div class="tecnica-card">
+                    <h3>TÉCNICA ÓLEO</h3>
+                    <a href="paginas/TÉCNICA ÓLEO.html"><img src="img/iconos/art-and-design.png" width="60" height="60"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="galeria-seccion" class="contenedor-galeria">
+        <div class="layout-principal">
+            <div class="seccion-scroll">
+                <h2 style="text-align: center; color: #2e7d32;">Galería de Trabajos</h2>
+                <div class="grid-imagenes" id="grid-js">
+                    <p id="msg-vacio" style="padding: 20px;">Cargando imágenes...</p>
+                </div>
+            </div>
+
+            <div class="seccion-destacada">
+                <h3 style="color: brown;">Última Guardada</h3>
+                <div id="contenedor-ultima">
+                    <!-- CORRECCION DE CONTRASTE: el gris #999 (2.85:1) pasa a #666 (5.74:1) para cumplir el minimo AA de 4.5:1. -->
+                    <p style="color: #666;">Sin fotos recientes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Horario con ID para el enlace de la navegación -->
+    <div id="horario-seccion" style="padding: 60px 20px; text-align: center; background-color: #f9fbf9;">
+        <h2 style="color: #2e7d32; font-size: 2rem; margin-bottom: 10px;">📅 Horario de Actividades</h2>
+        <p style="color: #555; margin-bottom: 30px;">Consulta tus clases presenciales para organizar tus entregas.</p>
+        
+        <div style="overflow-x: auto;">
+            <!-- CORRECCION DE CONTRASTE: en las celdas "Clase libre" el color #827717 (4.45:1) pasa a #7d7216 (4.77:1) para cumplir el minimo AA de 4.5:1. -->
+            <table class="tabla-horario">
+                <thead>
+                    <tr>
+                        <th>HORA</th>
+                        <th>LUNES</th>
+                        <th>MARTES</th>
+                        <th>MIÉRCOLES</th>
+                        <th>JUEVES</th>
+                        <th>VIERNES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="background-color: #f1f8e9; font-weight: bold; color: #2e7d32;">08:00 - 11:20</td>
+                        <td colspan="5" style="background-color: #fffde7; font-style: italic; color: #7d7216;">Clase libre o de otra materia</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #e8f5e9; font-weight: bold; color: #2e7d32;">11:20 - 11:40</td>
+                        <td colspan="5" style="background-color: #e3f2fd; font-weight: bold; color: #1565c0;">☕ RECESO</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #f1f8e9; font-weight: bold; color: #2e7d32;">11:40 - 14:00</td>
+                        <td style="background-color: #e8f5e9; color: #1b5e20; font-weight: bold;">🎨 ARTES VISUALES</td>
+                        <td style="background-color: #fffde7; font-style: italic; color: #7d7216; font-size: 0.85rem;">Clase libre o de otra materia</td>
+                        <td style="background-color: #e8f5e9; color: #1b5e20; font-weight: bold;">🎨 ARTES VISUALES</td>
+                        <td style="background-color: #fffde7; font-style: italic; color: #7d7216; font-size: 0.85rem;">Clase libre o de otra materia</td>
+                        <td style="background-color: #e8f5e9; color: #1b5e20; font-weight: bold;">🎨 ARTES VISUALES</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Técnicas de Artes Visuales</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDQUmLhpzEPENHoKK_5vZXUsmvEIU7oc_I",
+            authDomain: "galeria-de-arte-alumnos.firebaseapp.com",
+            projectId: "galeria-de-arte-alumnos",
+            storageBucket: "galeria-de-arte-alumnos.firebasestorage.app",
+            messagingSenderId: "828170010343",
+            appId: "1:828170010343:web:9e73cd708866ace7fa6c42"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.onload = async function() {
+            const grid = document.getElementById('grid-js');
+            const contenedorUltima = document.getElementById('contenedor-ultima');
+            const msgVacio = document.getElementById('msg-vacio');
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "galeriaEscolar"));
+                
+                if (!querySnapshot.empty) {
+                    msgVacio.style.display = 'none';
+                    contenedorUltima.innerHTML = '';
+                    grid.innerHTML = '';
+
+                    let listaFotos = [];
+                    querySnapshot.forEach((doc) => {
+                        listaFotos.push(doc.data().imagenUrl);
+                    });
+
+                    [...listaFotos].reverse().forEach(foto => {
+                        const img = document.createElement('img');
+                        img.src = foto;
+                        grid.appendChild(img);
+                    });
+
+                    const ultimaImg = document.createElement('img');
+                    ultimaImg.src = listaFotos[listaFotos.length - 1]; 
+                    ultimaImg.className = 'img-ultima';
+                    contenedorUltima.appendChild(ultimaImg);
+                    
+                    const p = document.createElement('p');
+                    p.style.fontSize = '0.9rem';
+                    p.style.color = '#666';
+                    p.style.marginTop = '10px';
+                    p.innerText = 'Tu creación más reciente';
+                    contenedorUltima.appendChild(p);
+                } else {
+                    msgVacio.innerText = 'No hay imágenes aún.';
+                }
+            } catch (error) {
+                console.error("Error al cargar en index:", error);
+                msgVacio.innerText = 'Error al conectar con la nube.';
+            }
+        }
+    </script>
+</body>
+</html>
