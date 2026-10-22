@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Escolar - Artes Visuales</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- REDISENO UNIFICADO: diseno compartido con el index (va despues de styles.css para poder sobrescribirlo). -->
+    <link rel="stylesheet" href="../css/sitio.css">
+    <style>
+        .galeria-contenedor {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .galeria-item {
+            position: relative;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .galeria-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        .btn-eliminar-foto {
+            width: 100%;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn-eliminar-foto:hover {
+            background-color: #b71c1c;
+        }
+        .galeria-vacia {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 40px;
+            color: #666;
+            font-size: 1.2rem;
+        }
+    </style>
+    <!-- CAMBIO 1 (accesibilidad): panel con control de tamano de fuente. -->
+    <link rel="stylesheet" href="../css/accesibilidad.css">
+    <!-- CAMBIO 4 (idioma): diccionario espanol a ingles. Debe cargarse ANTES de accesibilidad.js. -->
+    <script src="../js/idiomas/en.js"></script>
+    <!-- Va en el head (sin defer) para aplicar el tamano guardado antes de pintar la pagina. -->
+    <script src="../js/accesibilidad.js"></script>
+</head>
+<body class="pagina-sitio">
+
+    <!-- REDISENO UNIFICADO: barra superior igual a la del index (enlaces con ../ porque esta pagina esta en paginas/). -->
+    <nav aria-label="Menú principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#menu-tecnicas">Menú</a>
+        <a href="../index.html#galeria-seccion">Galería</a>
+        <a href="../index.html#horario-seccion">Horario</a>
+    </nav>
+
+    <main class="container-upload" style="max-width: 900px;">
+        <header>
+            <h2 class="titulo-pagina">Galería Escolar</h2>
+            <p class="subtitulo">Explora las creaciones compartidas por todos los estudiantes.</p>
+        </header>
+
+        <section id="galeria-imagenes" class="galeria-contenedor">
+            <p class="galeria-vacia">Cargando galería desde la nube...</p>
+        </section>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="../index.html" class="nav-item-inicio" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                <img src="../img/iconos/left-arrow.png" alt="Flecha inicio" width="20">
+                <span>Volver al Inicio</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- REDISENO UNIFICADO: pie de pagina igual al del index. -->
+    <footer class="footer">
+        <p>© 2026 Técnicas de Artes Visuales</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDQUmLhpzEPENHoKK_5vZXUsmvEIU7oc_I",
+            authDomain: "galeria-de-arte-alumnos.firebaseapp.com",
+            projectId: "galeria-de-arte-alumnos",
+            storageBucket: "galeria-de-arte-alumnos.firebasestorage.app",
+            messagingSenderId: "828170010343",
+            appId: "1:828170010343:web:9e73cd708866ace7fa6c42"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function cargarGaleriaNube() {
+            const contenedor = document.getElementById('galeria-imagenes');
+            contenedor.innerHTML = "";
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "galeriaEscolar"));
+                
+                if (querySnapshot.empty) {
+                    contenedor.innerHTML = `<p class="galeria-vacia">No hay imágenes en la galería todavía. ¡Sube tu obra!</p>`;
+                    return;
+                }
+
+                querySnapshot.forEach((documento) => {
+                    const data = documento.data();
+                    const idDoc = documento.id;
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'galeria-item';
+
+                    const img = document.createElement('img');
+                    img.src = data.imagenUrl;
+                    img.alt = "Obra escolar";
+
+                    const btnBorrar = document.createElement('button');
+                    btnBorrar.className = 'btn-eliminar-foto';
+                    btnBorrar.innerHTML = '🗑️ Borrar';
+                    
+                    btnBorrar.onclick = async function() {
+                        if (confirm("¿Estás seguro de que deseas eliminar esta obra de la galería general?")) {
+                            await deleteDoc(doc(db, "galeriaEscolar", idDoc));
+                            alert("Imagen eliminada correctamente.");
+                            cargarGaleriaNube();
+                        }
+                    };
+
+                    itemDiv.appendChild(img);
+                    itemDiv.appendChild(btnBorrar);
+                    contenedor.appendChild(itemDiv);
+                });
+            } catch (error) {
+                console.error("Error al cargar galería:", error);
+                contenedor.innerHTML = `<p class="galeria-vacia">Error al conectar con la nube.</p>`;
+            }
+        }
+
+        window.onload = cargarGaleriaNube;
+    </script>
+</body>
+</html>

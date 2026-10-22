@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TÉCNICA PLUMA</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- REDISENO UNIFICADO: diseno compartido con el index (va despues de styles.css para poder sobrescribirlo). -->
+    <link rel="stylesheet" href="../css/sitio.css">
+    <!-- CAMBIO 1 (accesibilidad): panel con control de tamano de fuente. -->
+    <link rel="stylesheet" href="../css/accesibilidad.css">
+    <!-- CAMBIO 4 (idioma): diccionario espanol a ingles. Debe cargarse ANTES de accesibilidad.js. -->
+    <script src="../js/idiomas/en.js"></script>
+    <!-- Va en el head (sin defer) para aplicar el tamano guardado antes de pintar la pagina. -->
+    <script src="../js/accesibilidad.js"></script>
+</head>
+<body class="pagina-sitio">
+
+    <!-- REDISENO UNIFICADO: barra superior igual a la del index (enlaces con ../ porque esta pagina esta en paginas/). -->
+    <nav aria-label="Menú principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#menu-tecnicas">Menú</a>
+        <a href="../index.html#galeria-seccion">Galería</a>
+        <a href="../index.html#horario-seccion">Horario</a>
+    </nav>
+
+    
+    <!-- REDISENO UNIFICADO: tarjeta blanca que agrupa titulo y contenido (como en el index). -->
+    <div class="pagina-tarjeta">
+    <header>
+        <h1 style= "text-align: center;"class="titulo-chorreado">TÉCNICA PLUMA</h1>
+    </header>
+
+    <main class="contenedor-principal">
+        <div class="imagen-central">
+            <div style="text-align: center;"><img src="../img/tecnicas/pluma/Pluma.jpeg" alt="Obra de técnica chorreado" width="300"></div>
+            <h5 style= "text-align: center;"class="pie-foto">Licencia Creative Commons Zero (CC0).</h5>
+        </div>
+<h3> Analiza la siguiente información </h3>
+   
+        <div style="text-align: center; width: 100%; margin: 20px 0;">
+    <iframe src="https://drive.google.com/file/d/1zzkrY3yCWehBIIGtdZD2LbPtYvk8LdD6/preview" width="100%" height="800px" style="border: none; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" allow="autoplay">
+        <p>Tu navegador no soporta la visualización de PDFs.</p>
+    </iframe>
+</div>
+        <section class="recursos">
+            <h3>Para comprender más sobre el tema observa el siguiente video:</h3>
+            <div style="text-align: center;">
+                <iframe src="https://www.youtube.com/embed/_nMLqXgqomI" 
+                    title="Aprende TODO sobre EL BOLÍGRAFO - Los Mejores Técnicas para Dibujar con Tinta" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <h3>Para comprender más sobre el tema analiza la siguiente información:</h3>
+            <div style="text-align: center;">
+                <a href="https://blog.espol.edu.ec/plumaytinta/pluma/tecnicas-de-dibujo-con-pluma/" target="_blank" class="enlace-icono">
+                    <img src="../img/iconos/browser.png" alt="Información" width="80">
+                </a>
+            </div>
+
+            <h3 class="enfasis-practica">¡Es tu turno, realiza la práctica de acuerdo a las indicaciones de tu maestro!</h3>
+            <div style="text-align: center;">
+                <a href="Practica.html" class="enlace-icono">
+                    <img src="../img/iconos/subir.png" alt="Ir a práctica" width="80">
+                </a>
+            </div>
+
+            <h3>Regresa al inicio</h3>
+            <div style="text-align: center;">
+                <a href="../index.html" class="enlace-icono">
+                    <img src="../img/iconos/left-arrow.png" alt="Inicio" width="80">
+                </a>
+            </div>
+        </section>
+    </main>
+    </div>
+
+    <!-- REDISENO UNIFICADO: pie de pagina igual al del index. -->
+    <footer class="footer">
+        <p>© 2026 Técnicas de Artes Visuales</p>
+    </footer>
+
+</body>
+</html>

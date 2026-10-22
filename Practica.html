@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artes Visuales - Comparte tu Creación</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- REDISENO UNIFICADO: diseno compartido con el index (va despues de styles.css para poder sobrescribirlo). -->
+    <link rel="stylesheet" href="../css/sitio.css">
+    <style>
+        /* Estilos específicos y modernos para la página de práctica */
+        body.body-upload {
+            background: linear-gradient(135deg, #2e7d32 0%, #81c784 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container-upload {
+            background: #ffffff;
+            width: 100%;
+            max-width: 650px;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+        }
+
+        .header-upload {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .titulo-pagina {
+            color: #2e7d32;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .subtitulo {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .upload-section {
+            background: #f9fbf9;
+            border: 2px dashed #81c784;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .label-archivo {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1b5e20;
+            font-size: 1rem;
+        }
+
+        input[type="file"] {
+            font-size: 0.9rem;
+            color: #444;
+            padding: 8px;
+            background: #fff;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .botones-container {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .btn-subir {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
+            flex: 1;
+            min-width: 160px;
+        }
+
+        .btn-subir:hover {
+            background-color: #1b5e20;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-borrar {
+            background-color: #d32f2f;
+            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.2);
+        }
+
+        .btn-borrar:hover {
+            background-color: #b71c1c;
+            box-shadow: 0 6px 15px rgba(211, 47, 47, 0.3);
+        }
+
+        .preview-container {
+            margin-top: 15px;
+        }
+
+        #img-destino {
+            max-width: 100%;
+            max-height: 220px;
+            border-radius: 12px;
+            display: none;
+            margin: 0 auto;
+            border: 3px solid #f1f8e9;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Cuadrícula de navegación limpia y organizada */
+        .nav-links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+            border-top: 2px solid #f1f8e9;
+            padding-top: 20px;
+        }
+
+        @media (min-width: 600px) {
+            .nav-links-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .nav-item-mini {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border: 1px solid #c8e6c9;
+            padding: 12px 8px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .nav-item-mini img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 6px;
+            object-fit: contain;
+        }
+
+        .nav-item-mini span {
+            font-size: 0.75rem;
+            color: #2e7d32;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-item-mini:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(46, 125, 50, 0.15);
+            background-color: #f1f8e9;
+        }
+
+        .nav-item-mini.destacada {
+            background: #f3e5f5;
+            border-color: #ce93d8;
+        }
+        .nav-item-mini.destacada span {
+            color: #7b1fa2;
+        }
+
+        .nav-item-inicio {
+            grid-column: span 2;
+            text-decoration: none;
+            margin-top: 5px;
+            padding: 12px;
+            background: #e3f2fd;
+            border: 1px solid #90caf9;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 600px) {
+            .nav-item-inicio {
+                grid-column: span 3;
+            }
+        }
+
+        .nav-item-inicio img {
+            width: 25px;
+            height: 25px;
+        }
+
+        .nav-item-inicio span {
+            color: #1565c0;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .nav-item-inicio:hover {
+            background: #bbdefb;
+            transform: translateY(-2px);
+        }
+    </style>
+    <!-- CAMBIO 1 (accesibilidad): panel con control de tamano de fuente. -->
+    <link rel="stylesheet" href="../css/accesibilidad.css">
+    <!-- CAMBIO 4 (idioma): diccionario espanol a ingles. Debe cargarse ANTES de accesibilidad.js. -->
+    <script src="../js/idiomas/en.js"></script>
+    <!-- Va en el head (sin defer) para aplicar el tamano guardado antes de pintar la pagina. -->
+    <script src="../js/accesibilidad.js"></script>
+</head>
+<body class="pagina-sitio">
+
+    <!-- REDISENO UNIFICADO: barra superior igual a la del index (enlaces con ../ porque esta pagina esta en paginas/). -->
+    <nav aria-label="Menú principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#menu-tecnicas">Menú</a>
+        <a href="../index.html#galeria-seccion">Galería</a>
+        <a href="../index.html#horario-seccion">Horario</a>
+    </nav>
+
+    <main class="container-upload contenedor-practica">
+        <header class="header-upload">
+            <h2 class="titulo-pagina">Comparte tu creación</h2>
+            <p class="subtitulo">Sube tu obra para que aparezca en la galería escolar.</p>
+        </header>
+        
+        <section class="upload-section">
+            <div class="input-group">
+                <label for="fileToUpload" class="label-archivo">Selecciona tu imagen:</label>
+                <input type="file" id="fileToUpload" accept="image/*">
+            </div>
+            
+            <div class="botones-container">
+                <button class="btn-subir" onclick="visualizarImagen()">
+                    ✨ Guardar en Galería
+                </button>
+                <button class="btn-subir btn-borrar" onclick="borrarImagen()">
+                    🗑️ Borrar / Cancelar
+                </button>
+            </div>
+            
+            <div class="preview-container">
+                <img id="img-destino" src="" alt="Vista previa de tu obra">
+            </div>
+        </section>
+
+        <!-- Navegación ordenada en cuadrícula adaptable -->
+        <nav class="nav-links-grid">
+            <a href="TÉCNICA LÁPIZ.html" class="nav-item-mini">
+                <img src="../img/iconos/art-and-design.png" alt="Icono">
+                <span>Lápiz</span>
+            </a>
+            <a href="TÉCNICA PLUMA.html" class="nav-item-mini">
+                <img src="../img/iconos/art-and-design.png" alt="Icono">
+                <span>Pluma</span>
+            </a>
+            <a href="puntillismo.html" class="nav-item-mini">
+                <img src="../img/iconos/art-and-design.png" alt="Icono">
+                <span>Puntillismo</span>
+            </a>
+            <a href="TÉCNICA PLUMA PRESPECTIVA.html" class="nav-item-mini">
+                <img src="../img/iconos/art-and-design.png" alt="Icono">
+                <span>Perspectiva</span>
+            </a>
+            <a href="TÉCNICA PUNTOS DE FUGA.html" class="nav-item-mini">
+                <img src="../img/iconos/art-and-design.png" alt="Icono">
+                <span>Puntos de Fuga</span>
+            </a>
+            <a href="TÉCNICA ESCALA.html" class="nav-item-mini">
+                <img src="../img/iconos/art-and-design.png" alt="Icono">
+                <span>Escala</span>
+            </a>
+            <a href="TÉCNICA COLOR.html" class="nav-item-mini">
+                <img src="../img/iconos/art-and-design.png" alt="Icono">
+                <span>Color</span>
+            </a>
+            <a href="TÉCNICA GISES PASTELES.html" class="nav-item-mini">
+                <img src="../img/iconos/art-and-design.png" alt="Icono">
+                <span>Gises Pasteles</span>
+            </a>
+            <a href="TÉCNICA ACUARELA.html" class="nav-item-mini">
+                <img src="../img/iconos/art-and-design.png" alt="Icono">
+                <span>Acuarela</span>
+            </a>
+            <a href="TÉCNICA ÓLEO.html" class="nav-item-mini">
+                <img src="../img/iconos/art-and-design.png" alt="Icono">
+                <span>Óleo</span>
+            </a>
+            <a href="Galeria.html" class="nav-item-mini destacada">
+                <img src="../img/iconos/galery.png" alt="Icono Galería">
+                <span>Ir a Galería</span>
+            </a>
+            <a href="../index.html" class="nav-item-inicio">
+                <img src="../img/iconos/left-arrow.png" alt="Flecha inicio">
+                <span>Volver al Inicio</span>
+            </a>
+        </nav>
+    </main>
+
+    <!-- REDISENO UNIFICADO: pie de pagina igual al del index. -->
+    <footer class="footer">
+        <p>© 2026 Técnicas de Artes Visuales</p>
+    </footer>
+
+    <!-- Importar Firebase SDK con tus credenciales -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDQUmLhpzEPENHoKK_5vZXUsmvEIU7oc_I",
+            authDomain: "galeria-de-arte-alumnos.firebaseapp.com",
+            projectId: "galeria-de-arte-alumnos",
+            storageBucket: "galeria-de-arte-alumnos.firebasestorage.app",
+            messagingSenderId: "828170010343",
+            appId: "1:828170010343:web:9e73cd708866ace7fa6c42"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.visualizarImagen = async function() {
+            const input = document.getElementById('fileToUpload');
+            const preview = document.getElementById('img-destino');
+
+            if (input.files && input.files[0]) {
+                const lector = new FileReader();
+                
+                lector.onload = async function(e) {
+                    const nuevaImagen = e.target.result;
+                    
+                    try {
+                        await addDoc(collection(db, "galeriaEscolar"), {
+                            imagenUrl: nuevaImagen,
+                            fecha: new Date()
+                        });
+                        
+                        alert("¡Excelente! Tu obra ha sido subida a la nube y compartida con todos.");
+                        preview.src = nuevaImagen;
+                        preview.style.display = 'block';
+                    } catch (error) {
+                        console.error("Error al subir a Firebase:", error);
+                        alert("La imagen es muy pesada o hubo un error de conexión.");
+                    }
+                }
+                lector.readAsDataURL(input.files[0]);
+            } else {
+                alert("Por favor, selecciona un archivo primero.");
+            }
+        };
+
+        window.borrarImagen = function() {
+            const input = document.getElementById('fileToUpload');
+            const preview = document.getElementById('img-destino');
+            input.value = "";
+            preview.src = "";
+            preview.style.display = 'none';
+            alert("Se ha limpiado la selección.");
+        };
+    </script>
+</body>
+</html>
