@@ -1,0 +1,821 @@
+/*
+ * accesibilidad.css
+ * ---------------------------------------------------------------------------
+ * Estilos del panel de accesibilidad (ver js/accesibilidad.js).
+ *
+ * CAMBIO 1: estilos del boton flotante, del panel y de los controles de
+ *           tamano de fuente.
+ * CAMBIO 2: control de tema en el panel y paleta completa del tema oscuro
+ *           (todo cuelga de html[data-tema="oscuro"], que pone js/accesibilidad.js).
+ * CAMBIO 4: ocultar el cuerpo un instante mientras se traduce la pagina (ver abajo).
+ * CAMBIO 3: estilos del narrador (boton rapido, controles del panel y resaltado del
+ *           bloque que se esta leyendo, en tema claro y oscuro).
+ * REDISENO UNIFICADO: reglas del tema oscuro para la tarjeta y el fondo de las
+ *           subpaginas (el diseno claro esta en css/sitio.css).
+ * CORRECCION MOVIL: reglas al final del archivo que evitan el scroll horizontal
+ *           en pantallas chicas, sobre todo con el texto agrandado.
+ *
+ * Nota: el panel usa unidades px a proposito. Asi el propio panel no cambia de
+ * tamano cuando el usuario agranda el texto de la pagina y los controles
+ * siempre quedan en el mismo lugar y con el mismo tamano.
+ * ---------------------------------------------------------------------------
+ */
+
+/*
+ * Aislamiento del panel frente a styles.css.
+ * styles.css define reglas globales como  div { display: flex; justify-content: center;
+ * text-align: justify; }  que descomponen el panel. Estas reglas, mas especificas,
+ * restauran el comportamiento normal SOLO dentro del panel, sin modificar styles.css.
+ */
+.a11y-widget div {
+    display: block;
+    text-align: left;
+}
+
+/* Contenedor fijo en la esquina inferior derecha, por encima del resto del sitio. */
+.a11y-widget {
+    display: block;
+    text-align: left;
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 2000;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.3;
+}
+
+/* Boton circular que abre el panel. */
+.a11y-toggle {
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background-color: #2e7d32;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.a11y-toggle:hover {
+    background-color: #1b5e20;
+}
+
+/* Ventana desplegable, abre hacia arriba del boton. */
+.a11y-panel {
+    position: absolute;
+    right: 0;
+    bottom: 64px;
+    width: 260px;
+    max-width: calc(100vw - 32px);
+    box-sizing: border-box;
+    padding: 14px;
+    background-color: #ffffff;
+    color: #1b1b1b;
+    border: 2px solid #2e7d32;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* El atributo hidden debe ganar siempre sobre cualquier regla de display. */
+.a11y-panel[hidden] {
+    display: none;
+}
+
+.a11y-seccion + .a11y-seccion {
+    margin-top: 14px;
+}
+
+.a11y-titulo {
+    margin: 0 0 8px 0;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+    color: #1b5e20;
+}
+
+/* Fila con A-  |  porcentaje  |  A+  (el selector doble gana a ".a11y-widget div"). */
+.a11y-widget .a11y-fila {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.a11y-valor {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1b1b1b;
+}
+
+/* Botones: area minima de 44 px para que sean faciles de tocar. */
+.a11y-btn {
+    box-sizing: border-box;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 6px 10px;
+    border: 2px solid #2e7d32;
+    border-radius: 8px;
+    background-color: #2e7d32;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.a11y-btn:hover {
+    background-color: #1b5e20;
+}
+
+/* El boton de A+ muestra una A mas grande, como pista visual. */
+.a11y-btn-mas {
+    font-size: 20px;
+}
+
+/* Boton "Restablecer": ocupa todo el ancho, con estilo secundario. */
+.a11y-btn-reset {
+    width: 100%;
+    background-color: #ffffff;
+    color: #1b5e20;
+}
+
+.a11y-btn-reset:hover {
+    background-color: #e8f5e9;
+}
+
+/* Boton en el limite (minimo o maximo): se ve atenuado y sin cursor de clic. */
+.a11y-btn[aria-disabled="true"] {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* Anillo de foco visible para quienes navegan con teclado. */
+.a11y-toggle:focus-visible,
+.a11y-btn:focus-visible {
+    outline: 3px solid #ffb300;
+    outline-offset: 2px;
+}
+
+/* El panel no debe aparecer al imprimir. */
+@media print {
+    .a11y-widget {
+        display: none;
+    }
+}
+
+
+/* ==========================================================================
+   CAMBIO 2: CONTROL DE TEMA EN EL PANEL (dos botones: Claro / Oscuro)
+   ========================================================================== */
+
+/* El selector doble gana a ".a11y-widget div" (que fuerza display: block). */
+.a11y-widget .a11y-segmentos {
+    display: flex;
+    gap: 8px;
+}
+
+/* Boton de tema: icono + texto. El activo se marca con aria-pressed="true". */
+.a11y-btn-tema {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background-color: #ffffff;
+    color: #1b5e20;
+}
+
+.a11y-btn-tema:hover {
+    background-color: #e8f5e9;
+}
+
+.a11y-btn-tema[aria-pressed="true"],
+.a11y-btn-tema[aria-pressed="true"]:hover {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.a11y-icono {
+    display: inline-flex;
+}
+
+/* ==========================================================================
+   CAMBIO 2: TEMA OSCURO
+   Todo lo de esta seccion solo se aplica cuando <html> tiene data-tema="oscuro".
+   El tema claro no se toca: es el CSS original del sitio.
+   ========================================================================== */
+
+/* Paleta del tema oscuro (variables reutilizadas en todas las reglas de abajo).
+   Los textos claros sobre estos fondos cumplen contraste AA (4.5:1 o mas). */
+html[data-tema="oscuro"] {
+    color-scheme: dark;               /* controles nativos (input file, scroll) en oscuro */
+    --t-fondo: #0e1a12;               /* fondo general */
+    --t-superficie: #17261c;          /* tarjetas y contenedores (antes blanco) */
+    --t-superficie-2: #1f3326;        /* superficies secundarias (antes verdes muy claros) */
+    --t-borde: #3b5a44;
+    --t-texto: #e6eee8;
+    --t-texto-suave: #b4c5b9;         /* antes grises #555 / #666 / #999 */
+    --t-acento: #81c784;
+    --t-acento-claro: #a5d6a7;        /* antes verdes #2e7d32 / #1b5e20 */
+    --t-calido: #ffab91;              /* antes "brown" en titulos */
+    --t-barra: #1b5e20;               /* barra de navegacion, pie y encabezados de tabla */
+}
+
+html[data-tema="claro"] {
+    color-scheme: light;
+}
+
+/* ---- Fondos generales ---- */
+html[data-tema="oscuro"] body {
+    background: var(--t-fondo);
+    color: var(--t-texto);
+}
+
+/* REDISENO UNIFICADO: las subpaginas ya usan el mismo fondo que el index (body.pagina-sitio),
+   asi que no hacen falta reglas aparte para el fondo azul verdoso ni para el degradado de
+   Practica y Galeria, que se eliminaron junto con esas clases del <body>. */
+
+/* ---- Textos que el CSS original pinta de negro o gris oscuro ---- */
+html[data-tema="oscuro"] :is(p, h2, h3, h4, h5),
+html[data-tema="oscuro"] .azul {
+    color: var(--t-texto);
+}
+
+/* Subtitulos que el original pone en gris. */
+html[data-tema="oscuro"] .subtitulo,
+html[data-tema="oscuro"] .galeria-vacia {
+    color: var(--t-texto-suave);
+}
+
+/* Titulos principales: el "brown" original pasa a un tono salmon legible. */
+html[data-tema="oscuro"] :is(h1, .titulo-chorreado, .titulo-frottage, .titulo-garabato,
+                             .titulo-puntillismo, .titulo-salpicado, .titulo-puntos-fuga,
+                             .seccion-tecnicas h2) {
+    color: var(--t-calido);
+}
+
+/* Titulos y etiquetas que el original pone en verde. */
+html[data-tema="oscuro"] .subtitulo-escuela,
+html[data-tema="oscuro"] .titulo-pagina,
+html[data-tema="oscuro"] .label-archivo,
+html[data-tema="oscuro"] .seccion-bienvenida h3 {
+    color: var(--t-acento-claro);
+}
+
+/* ---- REDISENO UNIFICADO: tarjeta de las paginas de tecnica ---- */
+html[data-tema="oscuro"] .pagina-tarjeta {
+    background-color: var(--t-superficie);
+    border-color: var(--t-borde);
+    color: var(--t-texto);
+}
+
+html[data-tema="oscuro"] .pagina-tarjeta h3 {
+    color: var(--t-acento-claro);
+}
+
+html[data-tema="oscuro"] .pagina-tarjeta .pie-foto {
+    color: var(--t-texto-suave);
+}
+
+/* ---- INDEX ---- */
+html[data-tema="oscuro"] .seccion-tecnicas {
+    background-color: var(--t-superficie);
+}
+
+html[data-tema="oscuro"] .seccion-bienvenida {
+    background-color: var(--t-superficie-2);
+    border-color: var(--t-borde);
+}
+
+html[data-tema="oscuro"] .seccion-bienvenida p {
+    color: var(--t-texto);
+}
+
+html[data-tema="oscuro"] .seccion-bienvenida ol li {
+    color: var(--t-acento-claro);
+}
+
+html[data-tema="oscuro"] .seccion-bienvenida ol li span {
+    color: var(--t-texto);
+}
+
+html[data-tema="oscuro"] .bloque-definicion {
+    border-top-color: var(--t-borde);
+}
+
+html[data-tema="oscuro"] .tecnica-card {
+    background: var(--t-superficie-2);
+    border-color: var(--t-borde);
+}
+
+html[data-tema="oscuro"] .seccion-scroll,
+html[data-tema="oscuro"] .seccion-destacada {
+    background: var(--t-superficie);
+    border-color: var(--t-borde);
+}
+
+html[data-tema="oscuro"] .grid-imagenes img,
+html[data-tema="oscuro"] .img-ultima {
+    border-color: var(--t-borde);
+}
+
+html[data-tema="oscuro"] .tabla-horario {
+    background-color: var(--t-superficie);
+}
+
+html[data-tema="oscuro"] .tabla-horario th {
+    background-color: var(--t-barra);
+}
+
+html[data-tema="oscuro"] .tabla-horario td {
+    border-color: var(--t-borde);
+}
+
+html[data-tema="oscuro"] body > nav,
+html[data-tema="oscuro"] .footer {
+    background-color: var(--t-barra);
+}
+
+/* Estilos escritos directamente en las etiquetas (atributo style="...").
+   Solo !important puede ganarles, por eso se usan selectores por atributo.
+   Cada color claro del horario tiene su equivalente oscuro con el mismo "significado". */
+html[data-tema="oscuro"] [style*="color: #2e7d32"],
+html[data-tema="oscuro"] [style*="color: #1b5e20"] {
+    color: var(--t-acento-claro) !important;
+}
+
+html[data-tema="oscuro"] [style*="color: brown"] {
+    color: var(--t-calido) !important;
+}
+
+html[data-tema="oscuro"] [style*="color: #666"],
+html[data-tema="oscuro"] [style*="color: #555"] {
+    color: var(--t-texto-suave) !important;
+}
+
+html[data-tema="oscuro"] [style*="color: #7d7216"] {            /* "Clase libre" (amarillo); antes #827717, ver index.html */
+    color: #e6d97a !important;
+}
+
+html[data-tema="oscuro"] [style*="color: #1565c0"] {            /* "Receso" (azul) */
+    color: #90caf9 !important;
+}
+
+html[data-tema="oscuro"] [style*="background-color: #f9fbf9"] { /* fondo de la seccion Horario */
+    background-color: var(--t-fondo) !important;
+}
+
+html[data-tema="oscuro"] [style*="background-color: #f1f8e9"] { /* celdas de hora */
+    background-color: var(--t-superficie-2) !important;
+}
+
+html[data-tema="oscuro"] [style*="background-color: #e8f5e9"] { /* Artes visuales (verde) */
+    background-color: #1d3a26 !important;
+}
+
+html[data-tema="oscuro"] [style*="background-color: #fffde7"] { /* Clase libre (amarillo) */
+    background-color: #36331a !important;
+}
+
+html[data-tema="oscuro"] [style*="background-color: #e3f2fd"] { /* Receso (azul) */
+    background-color: #17293d !important;
+}
+
+/* ---- GALERIA ---- */
+html[data-tema="oscuro"] .galeria-item {
+    background: var(--t-superficie);
+    border-color: var(--t-borde);
+}
+
+/* ---- PRACTICA (y contenedor de Galeria) ---- */
+html[data-tema="oscuro"] .container-upload {
+    background: var(--t-superficie);
+    border-color: var(--t-borde);
+}
+
+html[data-tema="oscuro"] .upload-section {
+    background: var(--t-superficie-2);
+}
+
+html[data-tema="oscuro"] input[type="file"] {
+    background: var(--t-fondo);
+    color: var(--t-texto);
+    border-color: var(--t-borde);
+}
+
+html[data-tema="oscuro"] #img-destino {
+    border-color: var(--t-borde);
+}
+
+html[data-tema="oscuro"] .nav-links-grid {
+    border-top-color: var(--t-borde);
+}
+
+html[data-tema="oscuro"] .nav-item-mini {
+    background: var(--t-superficie-2);
+    border-color: var(--t-borde);
+}
+
+html[data-tema="oscuro"] .nav-item-mini span {
+    color: var(--t-acento-claro);
+}
+
+html[data-tema="oscuro"] .nav-item-mini:hover {
+    background-color: #26402f;
+}
+
+html[data-tema="oscuro"] .nav-item-mini.destacada {              /* acceso a la Galeria (morado) */
+    background: #2d1f33;
+    border-color: #8e5a9b;
+}
+
+html[data-tema="oscuro"] .nav-item-mini.destacada span {
+    color: #e1bee7;
+}
+
+html[data-tema="oscuro"] .nav-item-inicio {                      /* boton de regreso al inicio (azul) */
+    background: #17293d;
+    border-color: #3a6a96;
+}
+
+html[data-tema="oscuro"] .nav-item-inicio span {
+    color: #90caf9;
+}
+
+html[data-tema="oscuro"] .nav-item-inicio:hover {
+    background: #1f3a55;
+}
+
+/* ---- El propio panel de accesibilidad en tema oscuro ---- */
+html[data-tema="oscuro"] .a11y-panel {
+    background-color: var(--t-superficie);
+    color: var(--t-texto);
+    border-color: var(--t-acento);
+}
+
+html[data-tema="oscuro"] .a11y-titulo {
+    color: var(--t-acento-claro);
+}
+
+html[data-tema="oscuro"] .a11y-valor {
+    color: var(--t-texto);
+}
+
+html[data-tema="oscuro"] .a11y-btn-reset,
+html[data-tema="oscuro"] .a11y-btn-tema {
+    background-color: transparent;
+    color: var(--t-acento-claro);
+    border-color: var(--t-acento);
+}
+
+html[data-tema="oscuro"] .a11y-btn-reset:hover,
+html[data-tema="oscuro"] .a11y-btn-tema:hover {
+    background-color: var(--t-superficie-2);
+}
+
+html[data-tema="oscuro"] .a11y-btn-tema[aria-pressed="true"],
+html[data-tema="oscuro"] .a11y-btn-tema[aria-pressed="true"]:hover {
+    background-color: #2e7d32;
+    color: #ffffff;
+    border-color: var(--t-acento);
+}
+
+/* ==========================================================================
+   CAMBIO 4: IDIOMA
+   ========================================================================== */
+
+/* Cuando el idioma guardado no es el espanol, js/accesibilidad.js agrega esta clase a <html>
+   y la quita en cuanto termina de traducir la pagina. Mientras tanto el cuerpo no se ve, para
+   que no aparezca el texto en espanol por un instante antes de pasar al otro idioma. */
+html.a11y-traduciendo body {
+    visibility: hidden;
+}
+
+/* Tarjetas de tecnicas del index en ingles: "WATERCOLOR" (10 letras en mayuscula) mide un par de
+   pixeles mas que el espacio de la tarjeta y se salia de su caja. Con 5px menos de relleno lateral
+   cabe completa. Solo en ingles: el espanol se queda exactamente como estaba. */
+html[lang="en"] .tecnica-card {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* ==========================================================================
+   CAMBIO 3: NARRADOR
+   ========================================================================== */
+
+/* El atributo hidden debe ocultar tambien dentro del panel (".a11y-widget div" fuerza display: block). */
+.a11y-widget [hidden] {
+    display: none;
+}
+
+/* Si la pantalla es baja (celular en horizontal), el panel se desplaza en lugar de salirse. */
+.a11y-panel {
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+/* Boton rapido: leer / pausar / continuar sin abrir el panel. Queda a la izquierda del
+   boton de accesibilidad (52px de ancho + 10px de separacion). */
+.a11y-narrar {
+    position: absolute;
+    right: 62px;
+    bottom: 0;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background-color: #2e7d32;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.a11y-narrar:hover {
+    background-color: #1b5e20;
+}
+
+/* Mientras lee cambia a ambar, para que se note de lejos que hay una lectura en curso. */
+.a11y-narrar[data-estado="leyendo"] {
+    background-color: #b45309;
+}
+
+.a11y-narrar[data-estado="leyendo"]:hover {
+    background-color: #92400e;
+}
+
+.a11y-narrar:focus-visible {
+    outline: 3px solid #ffb300;
+    outline-offset: 2px;
+}
+
+/* Boton principal del panel (Leer pagina / Pausar / Continuar): icono + texto. */
+.a11y-btn-narrar,
+.a11y-btn-detener {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.a11y-btn-narrar {
+    flex: 1;
+}
+
+/* Detener: estilo secundario (contorno), como "Restablecer". */
+.a11y-btn-detener {
+    background-color: #ffffff;
+    color: #1b5e20;
+}
+
+.a11y-btn-detener:hover {
+    background-color: #e8f5e9;
+}
+
+/* Selector de voz. */
+.a11y-etiqueta {
+    display: block;
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1b5e20;
+}
+
+.a11y-select {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 44px;
+    padding: 6px 8px;
+    border: 2px solid #2e7d32;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #1b1b1b;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.a11y-select:focus-visible {
+    outline: 3px solid #ffb300;
+    outline-offset: 2px;
+}
+
+/* Mensajes de estado del narrador. */
+.a11y-estado {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.3;
+    color: #3a3a3a;
+}
+
+.a11y-progreso {
+    color: #555555;
+}
+
+/* Bloque que se esta leyendo. Contorno ambar + fondo translucido: se distingue sin
+   depender solo del color, y el texto conserva su contraste. */
+.a11y-leyendo {
+    outline: 3px solid #f59e0b;
+    outline-offset: 3px;
+    background-color: rgba(255, 213, 79, 0.35);
+    border-radius: 4px;
+}
+
+/* En filas de tabla el contorno va hacia adentro para no pisar las filas vecinas. */
+tr.a11y-leyendo {
+    outline-offset: -3px;
+    border-radius: 0;
+}
+
+/* ---- Narrador en tema oscuro ---- */
+html[data-tema="oscuro"] .a11y-btn-detener {
+    background-color: transparent;
+    color: var(--t-acento-claro);
+    border-color: var(--t-acento);
+}
+
+html[data-tema="oscuro"] .a11y-btn-detener:hover {
+    background-color: var(--t-superficie-2);
+}
+
+html[data-tema="oscuro"] .a11y-etiqueta {
+    color: var(--t-acento-claro);
+}
+
+html[data-tema="oscuro"] .a11y-select {
+    background-color: var(--t-fondo);
+    color: var(--t-texto);
+    border-color: var(--t-acento);
+}
+
+html[data-tema="oscuro"] .a11y-estado,
+html[data-tema="oscuro"] .a11y-progreso {
+    color: var(--t-texto-suave);
+}
+
+/* Fondo mas tenue en oscuro para que el texto claro conserve el contraste. */
+html[data-tema="oscuro"] .a11y-leyendo {
+    outline-color: #ffca28;
+    background-color: rgba(255, 213, 79, 0.22);
+}
+
+/* ==========================================================================
+   CORRECCION MOVIL: DESBORDES HORIZONTALES
+   Solo aplica en pantallas de hasta 700 px. En computadora no cambia nada.
+   Causas encontradas: titulos con palabras largas, menu del index sin salto de
+   linea, imagenes/iframes con ancho fijo, tarjetas de 2 columnas que no caben
+   con el texto agrandado y un contenedor de la Galeria con padding extra.
+   ========================================================================== */
+@media (max-width: 700px) {
+
+    /* Menu superior del index: antes era fijo y sin salto de linea, asi que con
+       texto grande se salia de la pantalla. Ahora es "sticky" (queda arriba al
+       bajar, igual que antes), puede ocupar dos filas y empuja el contenido en
+       lugar de taparlo. */
+    body > nav {
+        position: sticky;
+        flex-wrap: wrap;
+        gap: 2px 4px;
+        padding: 8px 4px;
+        box-sizing: border-box;           /* el padding lateral no debe sumarse al width: 100 % */
+    }
+
+    body > nav a {
+        padding: 5px 10px;
+    }
+
+    /* Como el menu ya no es fijo, el hueco de 100px que le reservaba el titulo sobra. */
+    .seccion-tecnicas {
+        padding-top: 24px;
+    }
+
+    /* Los enlaces del menu no deben quedar tapados por el menu pegajoso. */
+    #inicio, #menu-tecnicas, #galeria-seccion, #horario-seccion {
+        scroll-margin-top: 5rem;
+    }
+
+    /* Titulos grandes: crecen con el tamano de texto elegido, pero nunca mas de lo
+       que cabe en el ancho de la pantalla, para que palabras como "PRESPECTIVA"
+       (aprox. 7 veces el tamano de la letra) entren completas en una linea.
+       La formula descuenta 80px de margenes y relleno. A 100 % se ven igual que antes. */
+    .titulo-chorreado, .titulo-frottage, .titulo-garabato,
+    .titulo-puntillismo, .titulo-salpicado, .titulo-puntos-fuga,
+    .seccion-tecnicas h2 {
+        font-size: min(2.5rem, calc((100vw - 80px) / 7.3));
+    }
+
+    /* REDISENO UNIFICADO: la tarjeta de las paginas de tecnica usa menos relleno lateral
+       en celulares para dejar mas ancho al texto. */
+    .pagina-tarjeta {
+        width: calc(100% - 24px);          /* 12px de margen por lado (antes 20px) */
+        padding: 20px 16px;
+    }
+
+    /* Titulo de la pagina Practica ("COMPARTE TU CREACION"): mismo criterio. Se limita
+       a .header-upload para no cambiar el titulo de la pagina Galeria. */
+    .header-upload .titulo-pagina {
+        font-size: min(1.8rem, 9vw);
+    }
+
+    /* Red de seguridad: si una palabra sigue sin caber, se corta en lugar de
+       ensanchar toda la pagina. (No se aplica a celdas de tabla a proposito: la
+       tabla del horario tiene su propio scroll horizontal.) */
+    h1, h2, h3, h4, h5, p, li, label, .nav-item-mini span {
+        overflow-wrap: anywhere;
+    }
+
+    /* Tarjetas de tecnicas del index: a 375 px y 100 % la palabra "PRESPECTIVA" medía 5px mas que el
+       espacio disponible y se salia de su caja sin notarse. Con 5px menos de relleno lateral cabe
+       completa. El titulo no debe partirse a media palabra (como haria la regla anterior), asi que
+       conserva el salto normal. A tamanos mayores ya cabe porque la cuadricula pasa a menos
+       columnas (ver .menu-grid al final). */
+    .tecnica-card {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .tecnica-card h3 {
+        overflow-wrap: normal;
+    }
+
+    /* Titulos h2 del index con font-size escrito en la etiqueta (2rem): solo !important le gana a
+       un estilo en linea. Mismo tope por ancho que los demas titulos; a 100 % no cambia. */
+    h2[style*="font-size: 2rem"] {
+        font-size: min(2rem, calc((100vw - 40px) / 5.8)) !important;
+    }
+
+    /* Imagenes, videos y marcos con ancho fijo (ej. width="400") se encogen al
+       ancho disponible. Las imagenes con height fijo conservan su proporcion. */
+    img, iframe, video {
+        max-width: 100%;
+    }
+
+    /* Los iframes traen un borde de 2px que se sumaba al 100 % de ancho. */
+    iframe {
+        box-sizing: border-box;
+    }
+
+    img[height] {
+        height: auto;
+    }
+
+    /* Los contenedores en fila (display: flex en styles.css) pasan a la linea de
+       abajo cuando algo no cabe, por ejemplo dos videos de YouTube lado a lado. */
+    div {
+        flex-wrap: wrap;
+    }
+
+    .a11y-widget div {
+        flex-wrap: nowrap;                /* el panel de accesibilidad no se envuelve */
+    }
+
+    /* Cuadricula de navegacion de Practica: misma idea. "span 2/3" se cambia por
+       "toda la fila" porque span creaba columnas fantasma al haber solo una. */
+    .nav-links-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr));
+    }
+
+    .nav-item-inicio {
+        grid-column: 1 / -1;
+    }
+
+    /* Galeria del index: min-width de 300/280 px no cabia en pantallas de 320 px. */
+    .seccion-scroll {
+        min-width: min(300px, 100%);
+        box-sizing: border-box;           /* el padding queda dentro del minimo, no se suma */
+    }
+
+    .seccion-destacada {
+        min-width: min(280px, 100%);
+        box-sizing: border-box;
+    }
+
+    /* Cuadricula de la pagina Galeria: columnas de 200px minimo no caben en
+       pantallas de 320px con texto grande. Se limita al ancho disponible. */
+    .galeria-contenedor {
+        grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+    }
+
+    /* Contenedor de la pagina Galeria: su ancho (90%) no incluia el padding de 40px
+       y por eso se salia. Con border-box el padding queda dentro del 90 %. */
+    .container-upload {
+        box-sizing: border-box;
+    }
+}
+
+/* Tarjetas de tecnicas (index): el minimo de columna crece con el texto (9.5rem
+   equivale a los 150px originales al 100 %). Asi, al agrandar la fuente hay menos
+   columnas y "PRESPECTIVA" cabe dentro de su tarjeta. Esta regla va FUERA del
+   media query porque el problema tambien aparecia en tabletas y computadoras. */
+.menu-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+}

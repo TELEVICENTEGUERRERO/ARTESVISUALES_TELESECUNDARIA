@@ -1,0 +1,127 @@
+/*
+ * sitio.css
+ * ---------------------------------------------------------------------------
+ * REDISENO UNIFICADO: diseno de las subpaginas (tecnicas, Practica y Galeria),
+ * copiado del index: fondo verde claro, barra superior verde, contenido dentro
+ * de una tarjeta blanca y pie de pagina verde.
+ *
+ * Se carga DESPUES de styles.css, asi que lo sobrescribe donde hace falta.
+ * El index NO usa este archivo: conserva sus propios estilos sin cambios.
+ * El tema oscuro de estos elementos esta en css/accesibilidad.css.
+ *
+ * Motivo del cambio: el diseno anterior de las tecnicas (texto negro sobre un
+ * fondo verde azulado) no cumplia el contraste minimo de accesibilidad (AA).
+ * El esquema del index (texto oscuro sobre blanco) si lo cumple.
+ * ---------------------------------------------------------------------------
+ */
+
+/* Fondo y tipografia de la pagina, iguales a los del index. */
+body.pagina-sitio {
+    background-color: #e8f5e9;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---- Barra superior (misma apariencia que la del index) ----
+   Se usa "body > nav" para no afectar al <nav> de iconos que hay dentro de
+   Practica. Es "sticky" (queda arriba al bajar) en lugar de "fixed": se ve igual,
+   pero no tapa el contenido ni necesita un hueco reservado. Las reglas moviles de
+   css/accesibilidad.css (menu en dos filas, etc.) tambien aplican aqui. */
+body > nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 0;
+    background-color: #2e7d32;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+body > nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 5px 15px;
+    transition: 0.3s;
+}
+
+body > nav a:hover {
+    background-color: #4caf50;
+    border-radius: 5px;
+}
+
+/* ---- Tarjeta de contenido de las paginas de tecnica ----
+   Mismo aspecto que las tarjetas del index (esquinas redondeadas, borde verde
+   claro y sombra suave). Agrupa el titulo y el contenido de la tecnica. */
+.pagina-tarjeta {
+    display: block;                           /* styles.css pone display: flex a todo div */
+    box-sizing: border-box;
+    width: min(900px, calc(100% - 40px));     /* 20px de margen a cada lado en pantallas chicas */
+    margin: 30px auto;
+    padding: 25px 30px;
+    background-color: #ffffff;
+    border: 1px solid #c8e6c9;
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    color: #333333;                           /* texto de listas y demas, igual que en el index */
+    line-height: 1.6;
+}
+
+/* Titulo: el "brown" ya es el mismo del index; solo se quita la sombra, que el index no usa. */
+.pagina-tarjeta h1 {
+    text-shadow: none;
+}
+
+/* Subtitulos de seccion en verde y centrados, como el h3 de la bienvenida del index. */
+.pagina-tarjeta h3 {
+    color: #2e7d32;
+    text-align: center;
+}
+
+/* styles.css pone los parrafos en negro puro; aqui se usa el gris oscuro del index. */
+.pagina-tarjeta p {
+    color: #333333;
+}
+
+/* Pie de foto (licencia): antes era casi blanco para el fondo verde azulado y sobre la
+   tarjeta blanca no se veria. Se usa el gris del index y un tamano legible (antes 8 px). */
+.pagina-tarjeta .pie-foto {
+    color: #666666;
+    font-size: 0.8rem;
+    font-weight: normal;
+}
+
+/* ---- Practica y Galeria ----
+   Antes el body centraba la tarjeta con flex y un degradado verde; ahora la tarjeta
+   va en el flujo normal de la pagina, centrada y con aire arriba y abajo. */
+.pagina-sitio .container-upload {
+    margin: 30px auto;
+    box-sizing: border-box;      /* su width: 90 % no incluia el padding de 40px y se salia de la pantalla */
+}
+
+/* Practica: ancho maximo de 650 px sin pegarse a los bordes en celulares. */
+.pagina-sitio .contenedor-practica {
+    width: min(650px, calc(100% - 40px));
+}
+
+/* ---- Pie de pagina (igual al del index) ---- */
+.footer {
+    text-align: center;
+    padding: 40px;
+    background: #2e7d32;
+    color: #ffffff;
+    margin-top: 50px;
+}
+
+.footer p {
+    color: #ffffff;                           /* styles.css pone p en negro */
+    text-align: center;
+}

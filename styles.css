@@ -1,0 +1,616 @@
+/* --- ESTILOS GENERALES Y LISTADOS --- */
+body {
+    background-color: rgba(6, 187, 36, 0.651);
+}
+
+/* Regla para justificar todos los listados del sitio web */
+ul, ol, ul li, ol li {
+    text-align: justify;
+    margin-bottom: 12px;
+}
+
+h1 {
+    text-align: center;
+    color: brown;
+    text-transform: uppercase;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.2); 
+}
+
+h2 {
+    text-align: center;
+    color: rgb(12, 12, 12);
+}
+
+h3 {
+    color: rgb(12, 12, 12);
+}
+
+h5 {
+    text-align: center;
+    color: rgb(10, 10, 10);
+    /* CAMBIO 1 (accesibilidad): 8px -> 0.5rem. Se ve igual al 100 %, pero ahora escala con el selector de tamano. */
+    font-size: 0.5rem;
+}
+
+p {
+    color: black;
+    text-align: justify;
+}
+
+div {
+    display: flex; 
+    justify-content: center; 
+    text-align: justify;
+}
+
+.puntos {
+    background-color: rgb(16, 17, 17); 
+    text-align: justify;
+}
+
+col {
+    width: 120px; 
+}
+
+th { 
+    background-color: #080808;
+}
+
+td { 
+    background-color: #0f0f0f;
+    text-align: center; 
+    white-space: nowrap;
+}
+
+table { 
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;  
+}
+
+/* --- GALERÍAS Y LAYOUTS --- */
+.contenedor-galeria {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.layout-principal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.seccion-scroll {
+    flex: 2;
+    min-width: 300px;
+    background: white;
+    padding: 25px;
+    border-radius: 25px;
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #c8e6c9;
+}
+
+.grid-imagenes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.grid-imagenes img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #f1f8e9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.grid-imagenes img:hover {
+    transform: scale(1.1); 
+}
+
+.seccion-destacada {
+    flex: 1;
+    min-width: 280px;
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
+    border: 2px solid #81c784;
+    height: fit-content;
+}
+
+.img-ultima {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #e8f5e9;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* --- TABLAS Y MENÚS --- */
+.tabla-horario {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-radius: 15px;
+    overflow: hidden; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.tabla-horario th {
+    background-color: #2e7d32; 
+    color: white;
+    padding: 15px;
+    text-transform: uppercase;
+}
+
+.tabla-horario td {
+    border: 1px solid #eeeeee;
+    padding: 12px;
+    text-align: center;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+.tecnica-card {
+    background: #e8f5e9;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid #c8e6c9;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.tecnica-card:hover {
+    background: #050505;
+    transform: translateY(-5px);
+}
+
+/* --- FORMULARIOS Y UPLOAD --- */
+.container-upload {
+    background: white;
+    padding: 40px;
+    border-radius: 25px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid #c8e6c9; 
+}
+
+.upload-section {
+    margin: 20px 0;
+    padding: 20px;
+    border: 2px dashed #81c784; 
+    border-radius: 15px;
+    background-color: #f9fbf9;
+}
+
+.btn-subir {
+    background-color: #2e7d32; 
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px; 
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
+}
+
+.btn-subir:hover {
+    background-color: #1b5e20;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(46, 125, 50, 0.3);
+}
+
+#img-destino {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin-top: 20px;
+    border: 4px solid #f1f8e9;
+    display: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.label-archivo {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #1b5e20;
+}
+
+.titulo-pagina {
+    color: #2e7d32;
+    margin-bottom: 5px;
+}
+
+.subtitulo {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+/* --- NAVEGACIÓN Y CUADRÍCULA ADAPTABLE PARA MÓVILES --- */
+.nav-links {
+    margin-top: 30px;
+    border-top: 2px solid #f1f8e9;
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px;
+}
+
+.nav-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en celulares para evitar amontonamientos */
+    gap: 12px;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+@media (min-width: 600px) {
+    .nav-links-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas en tablets y computadoras */
+    }
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-item p {
+    margin: 5px 0;
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-item img, .nav-item-mini img {
+    transition: transform 0.3s;
+}
+
+.nav-item:hover img {
+    transform: rotate(5deg) scale(1.1);
+}
+
+.nav-item-mini {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #e1e4e8;
+    padding: 12px 8px;
+    border-radius: 8px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.nav-item-mini img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 6px;
+    object-fit: contain;
+}
+
+.nav-item-mini span {
+    font-size: 0.75rem;
+    color: #2e7d32;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-item-mini:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    background-color: #f8f9fa;
+}
+
+.nav-item-mini.destacada {
+    background: #f3e5f5;
+    border-color: #ce93d8;
+}
+
+.nav-item-inicio {
+    grid-column: span 2;
+    text-decoration: none;
+    margin-top: 10px;
+    padding: 12px;
+    background: #e3f2fd;
+    border: 1px solid #90caf9;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (min-width: 600px) {
+    .nav-item-inicio {
+        grid-column: span 3;
+    }
+}
+
+.nav-item-inicio img {
+    width: 30px;
+}
+
+.nav-item-inicio span {
+    color: #1b5e20;
+    font-weight: bold;
+}
+
+/* --- CONTENEDORES DE SCROLL Y MUSEO --- */
+.contenedor-scroll {
+    width: 100%;
+    max-width: 1000px;
+    max-height: 500px;   
+    overflow-y: auto;   
+    padding: 30px;
+    border: 1px solid #c8e6c9;
+    background-color: rgba(255, 255, 255, 0.4); 
+    border-radius: 25px;
+    margin: 30px auto;
+}
+
+.contenedor-scroll::-webkit-scrollbar { 
+    width: 10px; 
+}
+
+.contenedor-scroll::-webkit-scrollbar-track {
+    background: #f1f8e9;
+    border-radius: 10px;
+}
+
+.contenedor-scroll::-webkit-scrollbar-thumb {
+    background: #81c784; 
+    border-radius: 10px;
+}
+
+.contenedor-scroll::-webkit-scrollbar-thumb:hover {
+    background: #2e7d32; 
+}
+
+.galeria { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 30px; 
+}
+
+.galeria img { 
+    width: 180px; 
+    height: 180px; 
+    object-fit: cover; 
+    border: 5px solid #ffffff; 
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    border-radius: 50%; 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.galeria img:hover { 
+    transform: scale(1.1) rotate(3deg); 
+    border-color: #81c784;
+}
+
+.museo-footer {
+    margin-top: 40px;
+    padding-bottom: 50px;
+}
+
+.btn-navegacion {
+    display: inline-block;
+    margin: 15px;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-navegacion:hover {
+    transform: translateY(-10px);
+}
+
+.btn-navegacion p {
+    color: #1b5e20;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-top: 8px;
+}
+
+.body-museo {
+    background-color: #e8f5e9; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.linea-decorativa { 
+    width: 80%; 
+    border: 0; 
+    border-top: 1px solid #c8e6c9; 
+    margin: 20px 0;
+}
+
+.icon-nav {
+    width: 80px;
+    height: 80px;
+    transition: 0.3s;
+}
+
+.icon-nav:hover {
+    transform: translateY(-5px);
+}
+
+.enlace-retorno p {
+    color: #2e7d32;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* --- SECCIONES ESPECÍFICAS DE TÉCNICAS --- */
+.body-tecnicas {
+    background-color: #050505; 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+.contenedor-tecnica {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgb(19, 19, 19);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.imagen-destacada img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+.licencia {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.caracteristicas h2 {
+    color: #0c0c0c; 
+    border-bottom: 2px solid #0a0a0a;
+    padding-bottom: 10px;
+}
+
+.lista-caracteristicas li, .lista-pasos li, .lista-azul li, .lista-formas li {
+    margin-bottom: 15px; 
+    text-align: justify;
+}
+
+.grid-recursos {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+    background: #080808;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.icono-recurso { width: 60px; height: 60px; transition: 0.3s; }
+.icono-grande { width: 80px; height: 80px; transition: 0.3s; }
+.icono-mediano { width: 60px; height: 60px; transition: 0.3s; }
+
+.icono-recurso:hover, .icono-grande:hover { transform: scale(1.1); }
+
+.body-frottage, .body-chorreado, .body-garabato, .body-puntillismo, .body-salpicado, .body-puntos-fuga {
+    background-color: rgb(2, 114, 114); 
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.titulo-frottage, .titulo-chorreado, .titulo-garabato, .titulo-puntillismo, .titulo-salpicado, .titulo-puntos-fuga {
+    text-align: center;
+    color: brown;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.imagen-central {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.imagen-central img {
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.pie-foto {
+    text-align: center;
+    font-weight: normal;
+    color: #f0f0f0;
+    margin-top: 10px;
+}
+
+.subtitulo-pasos, .subtitulo-caracteristicas, .subtitulo-formas {
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 25px;
+}
+
+.lista-pasos, .lista-azul, .lista-caracteristicas, .lista-formas {
+    max-width: 800px;
+    margin: 20px auto;
+    padding-left: 40px;
+}
+
+.azul {
+    color: rgb(1, 1, 20); 
+}
+
+.recursos {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.enlace-icono {
+    display: inline-block;
+    margin: 10px 0 25px 0;
+    transition: transform 0.2s;
+}
+
+.enlace-icono:hover {
+    transform: scale(1.1);
+}
+
+.enfasis-practica {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    text-align: center;
+    display: block;
+}
